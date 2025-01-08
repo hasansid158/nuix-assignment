@@ -23,10 +23,10 @@ const TabsMenu: React.FC<TabsMenuProps> = ({
       TabIndicatorProps={{ sx: { display: 'none' } }}
       {...rest}
     >
-      {tabHeaders.map((item, idx) => (
+      {tabHeaders.map((item, index) => (
         <Tab
-          key={idx}
-          value={idx}
+          key={index}
+          value={index}
           label={item}
         />
       ))}

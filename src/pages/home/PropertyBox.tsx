@@ -27,8 +27,9 @@ const PropertyItem = ({ data }: { data: Record<string, any> }) => {
   const properties = data?.properties;
   const labels = keys(properties);
 
-  return labels?.map((item: any) => <>
+  return labels?.map((item: any, index: number) => (
     <Box
+      key={index}
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -39,7 +40,7 @@ const PropertyItem = ({ data }: { data: Record<string, any> }) => {
       <Typography variant='body2' fontWeight='500' flex={1}>{item}:</Typography>
       <Typography variant='body1' flex={2}>{properties?.[item] || ''}</Typography>
     </Box>
-  </>);
+  ));
 }
 
 const PropertyBox = ({
@@ -74,14 +75,14 @@ const PropertyBox = ({
         <Divider sx={{ mt: 2 }} />
 
         <Box py={2}>
-          {isEmpty(itemData) &&
+          {isEmpty(itemData) ?
             <Typography variant='body1'>Please select a row from the table</Typography>
+            : !isEmpty(itemData) && tabValue === 0 ?
+              <PropertyItem data={itemData} />
+              :
+              <img src={image || ''} alt={itemData?.guid || ''} width='300px' height='150px' />
           }
-          {tabValue === 0 ?
-            <PropertyItem data={itemData} />
-            :
-            <img src={image || ''} alt={itemData?.guid || ''} width='300px' height='150px' />
-          }
+
         </Box>
       </Box>
     </Paper>
