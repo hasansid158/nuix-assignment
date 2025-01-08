@@ -27,8 +27,6 @@ const PropertyItem = ({ data }: { data: Record<string, any> }) => {
   const properties = data?.properties;
   const labels = keys(properties);
 
-  console.log(properties?.['date']);
-
   return labels?.map((item: any) => <>
     <Box
       sx={{
@@ -53,8 +51,6 @@ const PropertyBox = ({
   useEffect(() => {
     if (isEmpty(itemData)) return;
 
-    console.log(itemData)
-
     const imageId = itemData?.guid;
     fetchImage(imageId)?.then(setImage);
 
@@ -78,6 +74,9 @@ const PropertyBox = ({
         <Divider sx={{ mt: 2 }} />
 
         <Box py={2}>
+          {isEmpty(itemData) &&
+            <Typography variant='body1'>Please select a row from the table</Typography>
+          }
           {tabValue === 0 ?
             <PropertyItem data={itemData} />
             :
